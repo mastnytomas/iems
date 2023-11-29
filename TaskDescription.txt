@@ -1,0 +1,46 @@
+Junior React Developer Coding Challenge
+
+The target of this challenge is verification of candidate’s skills in frontend software development
+using React and TypeScript.
+
+It is not necessary to finish all functional requirements. Try to implement the task in the quality you
+believe is sufficient to call an assignment “done”.
+
+The time spent should not exceed 4 hours. We are interested in seeing how much can be done in
+such limited time frame and we don’t want you to spend too much time on this. Document all the
+changes you would normally continue with, had you more time.
+Task
+
+Acme Corporation is working on an internal employee management system. The system is going to
+be used by HR staff to track details about company employees.
+Your task is to create a first version of the app which allows HR staff to manage employees in the
+system. Since the backend part of the system does not exist yet, the app should be able to store its
+data in browser storage but it should also allow switching the storage for backend API calls easily.
+Optionally, create OpenAPI specs of REST API supporting all use cases.
+
+Employee data:
+• Full name
+• Company email address
+• Job position: frontend developer, backend developer, tester or system architect
+• Working time: full-time or part-time
+
+Functional Requirements
+• Create a new employee using a form
+• List existing employee including all their details in a table
+
+Non-Functional Requirements
+• Use React+TypeScript
+• Store data in browser storage
+• Implement storage so that it is easy to replace its implementation by API calls
+• Do not spend too much time with visual styling, optionally use Bootstrap
+• Do not implement any authentication
+• Use npm to manage dependencies
+• Use npm scripts to run the app (npm ci & npm start)
+Generally, keep it simple.
+
+Documentation Requirements
+• All tasks which you would normally do but did not have enough time
+• Time spent
+Delivery Instructions
+• Private GitHub / BitBucket / GitLab / Gitea repository
+• Use version control workflow (we are interested in seeing commit history)
