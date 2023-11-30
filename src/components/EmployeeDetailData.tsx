@@ -38,7 +38,7 @@ const InputWithLabel: React.FC<{
 				) : inputType === "select" ? (
 					<Select
 						value={value}
-						onChange={(newValue) => onChange(newValue)}
+						onChange={(newValue) => onChange(newValue as string)}
 						style={{ width: "100%" }}
 					>
 						{selectOptions?.map((option) => (
@@ -65,6 +65,7 @@ const EmployeeDetailData: React.FC<EmployeeDetailDataProps> = ({
 	const navigate = useNavigate();
 	const [editMode, setEditMode] = useState(false);
 	const [editedData, setEditedData] = useState<Employee>({ ...employee });
+	const [formError, setFromError] = useState<boolean>(false);
 	const dispatch = useDispatch();
 
 	const handleEditClick = () => {
@@ -73,6 +74,8 @@ const EmployeeDetailData: React.FC<EmployeeDetailDataProps> = ({
 
 	const handleCancelEdit = () => {
 		setEditMode(false);
+		setFromError(false);
+		setEditedData(employee);
 	};
 
 	const handleDeleteThisEmployee = () => {
@@ -81,8 +84,16 @@ const EmployeeDetailData: React.FC<EmployeeDetailDataProps> = ({
 	};
 
 	const handleSaveClick = () => {
-		setEditMode(false);
-		dispatch(updateEmployee(editedData));
+		const isWrongEmail =
+			editedData.companyEmail &&
+			!/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/.test(editedData.companyEmail);
+		if (isWrongEmail || editedData.fullName.length < 1) {
+			setFromError(true);
+		} else {
+			setFromError(false);
+			setEditMode(false);
+			dispatch(updateEmployee(editedData));
+		}
 	};
 
 	const handleInputChange = (key: keyof Employee, value: string) => {
@@ -135,6 +146,7 @@ const EmployeeDetailData: React.FC<EmployeeDetailDataProps> = ({
 							Cancel Edit mode
 						</Button>
 					)}
+					{formError && <p>fullName is not deffined or wrong email</p>}
 				</Flex>
 				<Flex wrap="wrap" gap="small" style={{ paddingTop: 30 }}>
 					<Link to={"/"}>
