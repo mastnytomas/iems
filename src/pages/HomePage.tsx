@@ -4,7 +4,6 @@ import EmployeeTable from "../components/EmployeeTable";
 const HomePage = () => {
 	return (
 		<div>
-			HomePage
 			<AddEmployeeForm />
 			<EmployeeTable />
 		</div>
