@@ -1,5 +1,6 @@
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { Button, Modal, Table } from "antd";
+import Title from "antd/es/typography/Title";
 import React from "react";
 import { Link } from "react-router-dom";
 import { EMPLOYEE_TEST_DATA } from "../data/Employee";
@@ -57,7 +58,12 @@ const columns = [
 ];
 
 const EmployeeTable: React.FC = () => {
-	return <Table dataSource={EMPLOYEE_TEST_DATA} columns={columns} />;
+	return (
+		<>
+			<Title level={2}>Employee list</Title>
+			<Table dataSource={EMPLOYEE_TEST_DATA} columns={columns} />
+		</>
+	);
 };
 
 export default EmployeeTable;
