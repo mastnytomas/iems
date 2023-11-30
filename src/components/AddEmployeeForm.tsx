@@ -1,17 +1,20 @@
 import { Button, Form, Input, Select } from "antd";
 import Title from "antd/es/typography/Title";
 import React from "react";
+import { useDispatch } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
+import { addEmployee } from "../redux/employeesSlice";
 import { Employee } from "../types/types";
 
 const { Option } = Select;
 
 const AddEmployeeForm: React.FC = () => {
 	const [form] = Form.useForm();
+	const dispatch = useDispatch();
 
 	const onFinish = (values: Employee) => {
 		const employeeWithId = { ...values, id: uuidv4() };
-		console.log("Received values with ID:", employeeWithId);
+		dispatch(addEmployee(employeeWithId));
 	};
 
 	return (

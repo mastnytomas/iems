@@ -1,7 +1,9 @@
 import { CloseOutlined } from "@ant-design/icons";
 import { Button, Card, Flex, Input, Select } from "antd";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { deleteEmployee, updateEmployee } from "../redux/employeesSlice";
 import { Employee } from "../types/types";
 
 const { Option } = Select;
@@ -60,8 +62,10 @@ const InputWithLabel: React.FC<{
 const EmployeeDetailData: React.FC<EmployeeDetailDataProps> = ({
 	employee,
 }) => {
+	const navigate = useNavigate();
 	const [editMode, setEditMode] = useState(false);
 	const [editedData, setEditedData] = useState<Employee>({ ...employee });
+	const dispatch = useDispatch();
 
 	const handleEditClick = () => {
 		setEditMode(true);
@@ -71,9 +75,14 @@ const EmployeeDetailData: React.FC<EmployeeDetailDataProps> = ({
 		setEditMode(false);
 	};
 
+	const handleDeleteThisEmployee = () => {
+		dispatch(deleteEmployee(employee.id));
+		navigate("/");
+	};
+
 	const handleSaveClick = () => {
-		console.log("Edited Data:", editedData);
 		setEditMode(false);
+		dispatch(updateEmployee(editedData));
 	};
 
 	const handleInputChange = (key: keyof Employee, value: string) => {
@@ -131,7 +140,7 @@ const EmployeeDetailData: React.FC<EmployeeDetailDataProps> = ({
 					<Link to={"/"}>
 						<Button>Back</Button>
 					</Link>
-					<Button type="primary" danger>
+					<Button type="primary" danger onClick={handleDeleteThisEmployee}>
 						Delete this employee
 					</Button>
 				</Flex>
